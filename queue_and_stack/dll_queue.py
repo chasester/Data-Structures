@@ -1,6 +1,6 @@
-import sys
-sys.path.append('../doubly_linked_list')
+import project;
 from doubly_linked_list import DoublyLinkedList
+
 
 
 class Queue:

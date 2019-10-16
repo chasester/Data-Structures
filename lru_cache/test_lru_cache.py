@@ -7,27 +7,26 @@ class CacheTests(unittest.TestCase):
         self.cache = LRUCache(3)
 
     def test_cache_overwrite_appropriately(self):
-        self.cache.set('item1', 'a')
-        self.cache.set('item2', 'b')
-        self.cache.set('item3', 'c')
+        self.cache.set('item1', 'a') #a
+        self.cache.set('item2', 'b') # b a 
+        self.cache.set('item3', 'c') # c b a
 
-        self.cache.set('item2', 'z')
-
-        self.assertEqual(self.cache.get('item1'), 'a')
-        self.assertEqual(self.cache.get('item2'), 'z')
+        self.cache.set('item2', 'z') # z c a
+        self.assertEqual(self.cache.get('item1'), 'a') 
+        self.assertEqual(self.cache.get('item2'), 'z') 
 
     def test_cache_insertion_and_retrieval(self):
-        self.cache.set('item1', 'a')
-        self.cache.set('item2', 'b')
-        self.cache.set('item3', 'c')
+        pass;        
+        self.cache.set('item1', 'a') #a
+        self.cache.set('item2', 'b') #b a
+        self.cache.set('item3', 'c') # c b a
+        self.assertEqual(self.cache.get('item1'), 'a') #a c b
 
-        self.assertEqual(self.cache.get('item1'), 'a')
-        self.cache.set('item4', 'd')
-
-        self.assertEqual(self.cache.get('item1'), 'a')
-        self.assertEqual(self.cache.get('item3'), 'c')
-        self.assertEqual(self.cache.get('item4'), 'd')
-        self.assertIsNone(self.cache.get('item2'))
+        self.cache.set('item4', 'd') # d a c
+        self.assertEqual(self.cache.get('item1'), 'a') #a d c
+        self.assertEqual(self.cache.get('item3'), 'c') #c a d
+        self.assertEqual(self.cache.get('item4'), 'd') #d c a
+        self.assertIsNone(self.cache.get('item2')) #
 
     def test_cache_nonexistent_retrieval(self):
         self.assertIsNone(self.cache.get('nonexistent'))

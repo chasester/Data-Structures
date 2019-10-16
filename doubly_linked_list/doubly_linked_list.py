@@ -61,13 +61,13 @@ class DoublyLinkedList:
             self.tail = n;
         self.head = n;
         self.length += 1;
-        pass
+        return n;
 
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
     Returns the value of the removed Node."""
     def remove_from_head(self):
-        if(not self.head):
+        if(not self.head): 
             return None;
         a = self.head.value;
         if(self.tail == self.head):
@@ -92,7 +92,7 @@ class DoublyLinkedList:
             self.head = n;
         self.tail = n;
         self.length += 1;
-        pass
+        return n;
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
@@ -118,8 +118,11 @@ class DoublyLinkedList:
         #unlink me from the spot im at
         if(node.prev):
             node.prev.next = node.next;
+            if(node == self.tail and len(self) > 1):
+                self.tail = node.prev;
         if(node.next):
             node.next.prev = node.prev;
+                
         
         #add me to the front
         self.head.prev = node;
